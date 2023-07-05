@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 数据
+# data = [1.166103, 1.1664779, 1.1682385, 1.1680541, 1.1679923, 1.1678792, 1.1682314, 1.1679613, 1.1679053, 1.1687136, 1.1683294, 1.1684405]
+data = [2.4533959, 2.4531645, 2.4529386, 2.4522892, 2.4521337, 2.4521447, 2.4527745, 2.4530255, 2.4532103, 2.4521079,
+        2.452942, 2.4528734]
+# 计算统计量
+mean = np.mean(data)
+std = np.std(data)
+confidence_interval = (mean - 2 * std, mean + 2 * std)
+
+# 计算每个数据点的上下误差范围
+y_error = [std] * len(data)
+
+# x轴数据
+x = np.arange(1, len(data) + 1)
+
+# 绘制散点图和误差棒
+plt.errorbar(x, data, yerr=y_error, fmt='o', color='black', capsize=2, label='Data')
+
+# 绘制置信区间
+# plt.axhspan(confidence_interval[0], confidence_interval[1], color='gray', alpha=0.3, label='Confidence Interval')
+# 绘制置信区间上下两条线
+plt.axhline(confidence_interval[0], color='green', linestyle='-', label='Confidence Interval')
+plt.axhline(confidence_interval[1], color='green', linestyle='-', label='Confidence Interval')
+
+# 绘制平均值
+plt.axhline(mean, color='red', linestyle='--', label='Mean')
+
+# 添加图例、标题和轴标签
+plt.legend()
+plt.title('铅标准溶液中208Pb/207Pb比值短期稳定性变化')
+plt.xlabel('Run#')
+plt.ylabel('208Pb/207Pb')
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+
+# 显示图表
+plt.show()
+
+
+
+
+
+
+
+
+
